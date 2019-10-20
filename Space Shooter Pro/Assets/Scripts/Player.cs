@@ -121,15 +121,16 @@ public class Player : MonoBehaviour
 
         _lives--;
 
-        _uiManager.UpdateLives(_lives);
+        
 
         if (_lives < 1 )
         {
             //communicate with spawn manager
             _spawnManager.OnPlayerDeath();
-
             Destroy(this.gameObject);
         }
+
+        _uiManager.UpdateLives(_lives);
     }
 
     public void TripleShotActive()
