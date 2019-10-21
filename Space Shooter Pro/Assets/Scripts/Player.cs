@@ -38,6 +38,9 @@ public class Player : MonoBehaviour
     private GameObject _leftEngineFire;
     [SerializeField]
     private GameObject _rightEngineFire;
+    [SerializeField]
+    private AudioClip _laserSoundClip;
+    private AudioSource _audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,17 +48,27 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _audioSource = GetComponent<AudioSource>();
         _leftEngineFire.SetActive(false);
         _rightEngineFire.SetActive(false);
         if (_spawnManager == null)
         {
             Debug.LogError("The Spawn Manager is Null");
         }
+
         if (_uiManager == null)
         {
             Debug.LogError("The UI Manager is Null");
         }
 
+        if (_audioSource == null)
+        {
+            Debug.LogError("The Audio is Null");
+        }
+        else
+        {
+            _audioSource.clip = _laserSoundClip;
+        }
     }
 
     // Update is called once per frame
@@ -112,6 +125,8 @@ public class Player : MonoBehaviour
         {
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.0f, 0), Quaternion.identity);
         }
+
+        _audioSource.Play();
 
     }
 

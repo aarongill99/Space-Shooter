@@ -8,13 +8,17 @@ public class Enemy : MonoBehaviour
     private float _speed = 4.0f;
     [SerializeField]
     private Player _player;
+    [SerializeField]
+    private BoxCollider2D _enemyCollider;
 
     private Animator _anim;
+    private AudioSource _audioSource;
     // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
-
+        _enemyCollider = GetComponent<BoxCollider2D>();
+        _audioSource = GetComponent<AudioSource>();
         if (_player == null)
         {
             Debug.LogError("The Player is Null");
@@ -56,6 +60,7 @@ public class Enemy : MonoBehaviour
             }
             _anim.SetTrigger("OnEnemyDeath");
             _speed = 0;
+            _audioSource.Play();
             Destroy(this.gameObject, 2f);
         }
 
@@ -69,7 +74,9 @@ public class Enemy : MonoBehaviour
             }
 
             _anim.SetTrigger("OnEnemyDeath");
+            _enemyCollider.enabled = false;
             _speed = 0;
+            _audioSource.Play();
             Destroy(this.gameObject, 2f);
             
         }
