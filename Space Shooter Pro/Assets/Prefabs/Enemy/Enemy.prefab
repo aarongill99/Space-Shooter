@@ -99,8 +99,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
+  _laserPrefab: {fileID: 661658976811601973, guid: 0b93bb22e0a2ab540ae503d3766ace9c,
+    type: 3}
   _player: {fileID: 0}
   _enemyCollider: {fileID: 0}
+  _fireRate: 3
 --- !u!50 &302876832890437484
 Rigidbody2D:
   serializedVersion: 4
