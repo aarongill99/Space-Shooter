@@ -34,6 +34,10 @@ public class Player : MonoBehaviour
     private int _score;
     [SerializeField]
     private UIManager _uiManager;
+    [SerializeField]
+    private GameObject _leftEngineFire;
+    [SerializeField]
+    private GameObject _rightEngineFire;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +45,8 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
-
+        _leftEngineFire.SetActive(false);
+        _rightEngineFire.SetActive(false);
         if (_spawnManager == null)
         {
             Debug.LogError("The Spawn Manager is Null");
@@ -121,7 +126,15 @@ public class Player : MonoBehaviour
 
         _lives--;
 
+        if (_lives == 2 )
+        {
+            _leftEngineFire.SetActive(true);
+        }
         
+        if (_lives == 1)
+        {
+            _rightEngineFire.SetActive(true);
+        }
 
         if (_lives < 1 )
         {
